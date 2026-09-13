@@ -1,0 +1,145 @@
+:root {
+--ink: #333333;
+--navy: #1f4e79;
+--accent: #2f88c4;
+--muted: #6b7280;
+--line: #e5e7eb;
+}
+
+* { box-sizing: border-box; }
+
+body {
+margin: 0;
+font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
+font-size: 16px;
+line-height: 1.7;
+color: var(--ink);
+background: #ffffff;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.site-header {
+display: flex;
+align-items: center;
+justify-content: space-between;
+flex-wrap: wrap;
+gap: 16px;
+padding: 14px 32px;
+background: #ffffff;
+border-bottom: 1px solid var(--line);
+}
+
+.brand img { height: 44px; width: auto; }
+
+.site-nav a {
+margin-left: 26px;
+font-size: 12px;
+letter-spacing: 0.08em;
+color: var(--navy);
+text-transform: uppercase;
+}
+
+.hero { background: var(--navy); }
+.hero img { width: 100%; height: auto; }
+
+.section {
+max-width: 860px;
+margin: 0 auto;
+padding: 64px 24px;
+text-align: center;
+}
+
+.section.alt { background: #f7f9fb; max-width: none; }
+.section.alt > * { max-width: 860px; margin-left: auto; margin-right: auto; }
+
+.section h2 {
+margin: 0;
+font-size: 30px;
+font-weight: 400;
+letter-spacing: 0.06em;
+color: var(--navy);
+}
+
+.rule {
+display: block;
+width: 46px;
+height: 3px;
+margin: 18px auto 28px;
+background: var(--accent);
+}
+
+.tagline {
+margin-top: 28px;
+font-size: 18px;
+font-style: italic;
+color: var(--muted);
+}
+
+.team {
+list-style: none;
+margin: 0;
+padding: 0;
+}
+
+.team li { padding: 12px 0; }
+
+.team h3 {
+margin: 0;
+font-size: 20px;
+font-weight: 600;
+color: var(--navy);
+}
+
+.team .role { margin: 4px 0 10px; color: var(--muted); }
+
+.more {
+display: inline-block;
+padding: 8px 22px;
+border: 1px solid var(--accent);
+border-radius: 2px;
+font-size: 13px;
+letter-spacing: 0.04em;
+}
+
+.more:hover { background: var(--accent); color: #ffffff; text-decoration: none; }
+
+.bio {
+max-width: 780px;
+margin: 0 auto;
+padding: 64px 24px;
+}
+
+.bio h1 {
+margin: 0;
+font-size: 30px;
+font-weight: 400;
+letter-spacing: 0.06em;
+color: var(--navy);
+text-transform: uppercase;
+}
+
+.bio .role { margin: 6px 0 0; color: var(--muted); }
+
+.bio p { text-align: left; }
+
+.back { display: inline-block; margin-top: 28px; font-size: 14px; }
+
+.site-footer {
+padding: 34px 24px 44px;
+border-top: 1px solid var(--line);
+text-align: center;
+font-size: 13px;
+color: var(--muted);
+}
+
+.site-footer nav a { margin: 0 10px; color: var(--navy); }
+
+@media (max-width: 640px) {
+.site-header { justify-content: center; }
+.site-nav a { margin: 0 10px; }
+.section { padding: 44px 20px; }
+}
