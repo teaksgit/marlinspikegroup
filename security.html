@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Security and Data Handling | Marlinspike Family Office Dashboard</title>
+<meta name="description" content="Security controls, data scope, and token handling for the Marlinspike Family Office Dashboard's QuickBooks Online integration." />
+<link rel="canonical" href="https://marlinspikegroup.com/security.html" />
+<style>
+  :root { --fg:#111827; --muted:#4b5563; --line:#e5e7eb; --bg:#ffffff; --code:#f3f4f6; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg);
+    font-family: ui-sans-serif, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size:15px; line-height:1.65; }
+  header { border-bottom:1px solid var(--line); }
+  .bar { max-width:44rem; margin:0 auto; padding:1rem; font-weight:600; }
+  main { max-width:44rem; margin:0 auto; padding:2.5rem 1rem 4rem; }
+  h1 { font-size:1.85rem; line-height:1.25; margin:0 0 .35rem; letter-spacing:-.01em; }
+  .updated { color:var(--muted); font-size:.85rem; margin:0 0 2rem; }
+  h2 { font-size:1.1rem; margin:2rem 0 .5rem; }
+  p, li { color:var(--muted); }
+  ul { padding-left:1.25rem; }
+  li { margin:.2rem 0; }
+  code { background:var(--code); border-radius:4px; padding:.1rem .3rem; font-size:.85em; }
+  a { color:#1d4ed8; }
+  nav.footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1.25rem;
+    display:flex; gap:1.25rem; flex-wrap:wrap; font-size:.9rem; }
+</style>
+</head>
+<body>
+<header><div class="bar">Marlinspike Family Office Dashboard</div></header>
+<main>
+<h1>Security and Data Handling</h1>
+<p class="updated">Last updated: August 31, 2026</p>
+
+<p>This statement describes how the Marlinspike Family Office Dashboard (the "Application"), operated by <strong>Marlinspike Group LLC</strong>, protects the data it holds, including data read from QuickBooks Online. It is the reference document for our QuickBooks Online integration review.</p>
+
+<h2>1. Application profile</h2>
+<ul>
+  <li>Private, single-owner internal application. No public sign-up and no unrelated tenants.</li>
+  <li>Accounts are created only by an administrator. There is no self-registration and no anonymous access.</li>
+  <li>All authorized users belong to the owner's own organization.</li>
+</ul>
+
+<h2>2. Authentication and access control</h2>
+<ul>
+  <li>Email and password authentication provided by a managed authentication service.</li>
+  <li>Time-based one-time-password multi-factor authentication is supported, and is required for administrator accounts.</li>
+  <li>Passwords are checked against known-breached password lists at the time they are set.</li>
+  <li>Repeated failed sign-in attempts trigger a temporary lockout.</li>
+  <li>Sessions terminate automatically after a period of inactivity.</li>
+  <li>Role-based access control separates administrator, standard, and read-only roles. Roles are stored server-side in a dedicated table and evaluated by server-side functions; they cannot be changed from the browser.</li>
+  <li>Only administrators can connect a QuickBooks company file, run a sync, edit category mappings, or recategorize transactions.</li>
+</ul>
+
+<h2>3. Data protection</h2>
+<ul>
+  <li>All traffic between the browser, the application backend, and Intuit's APIs uses HTTPS/TLS.</li>
+  <li>Data is stored in a managed PostgreSQL database with encryption at rest provided by the hosting platform.</li>
+  <li>Every table holding financial data has row-level security enabled, with policies that limit each request to the entities the requesting user is authorized to see.</li>
+  <li>Database backups are managed by the hosting platform and are subject to the same access restrictions.</li>
+</ul>
+
+<h2>4. QuickBooks Online data scope</h2>
+<p>The Application requests a single OAuth scope, <code>com.intuit.quickbooks.accounting</code>, and uses it for reading only. It never writes, updates, or deletes data in QuickBooks Online.</p>
+<p>Data read and stored:</p>
+<ul>
+  <li>Company name and realm identifier of each connected company file.</li>
+  <li>Chart of accounts: account name, fully qualified name, type, subtype, classification, active flag.</li>
+  <li>Expense and journal transaction lines: date, transaction type, document number, vendor or payee name, memo, account, and amount.</li>
+</ul>
+<p>Data explicitly not requested or stored:</p>
+<ul>
+  <li>Payroll data and employee records.</li>
+  <li>Customer contact information.</li>
+  <li>Bank account numbers, routing numbers, and payment card data.</li>
+  <li>Any Intuit user credentials. Authentication happens entirely on Intuit's own pages.</li>
+</ul>
+
+<h2>5. OAuth token handling</h2>
+<ul>
+  <li>The authorization code exchange happens entirely server-side, in a backend function. The authorization code, client ID, and client secret are never present in browser code.</li>
+  <li>Access and refresh tokens are stored in a dedicated server-side table that grants no privileges to browser-facing roles. The table is reachable only by the backend service identity, so tokens cannot be read by any signed-in user through the client API.</li>
+  <li>Tokens are never written to application logs, error messages, or analytics.</li>
+  <li>The OAuth client ID and client secret are held in the platform's encrypted secret store and exposed only as environment variables to backend functions.</li>
+  <li>The <code>state</code> parameter is HMAC-signed server-side and expires after 30 minutes. Callbacks with a missing, tampered, or expired state are rejected before any token exchange. Post-authorization return URLs are restricted to an allow-list of our own origins.</li>
+  <li>Access tokens are refreshed automatically using the stored refresh token; no manual re-entry occurs.</li>
+</ul>
+
+<h2>6. Revocation and deletion</h2>
+<ul>
+  <li>An administrator can disconnect a company file in the Application, which deletes the stored access and refresh tokens for that company.</li>
+  <li>Access can also be revoked at any time from Intuit's own account settings, which immediately ends the Application's ability to read that company file.</li>
+  <li>Synced accounting data can be deleted by an administrator at any time.</li>
+</ul>
+
+<h2>7. Logging and monitoring</h2>
+<p>Sign-in events, page views, and administrative actions are recorded for security review. Backend function logs record request outcomes and errors; they are deliberately written so as not to include tokens, secrets, or credentials. An internal audit view flags unexpected changes in recorded financial values for human review.</p>
+
+<h2>8. Third-party processors</h2>
+<ul>
+  <li>Application and database hosting provider — hosting, database, storage, backups.</li>
+  <li>Intuit Inc. — source of authorized QuickBooks Online data.</li>
+  <li>AI service provider — receives only the data needed to answer a question an authorized user asks the built-in advisor, and is contractually restricted from using it for model training.</li>
+  <li>Market data providers — receive security identifiers only, never account or entity data.</li>
+</ul>
+
+<h2>9. Incident handling</h2>
+<p>Suspected security issues are investigated by the owner's administrator. Where an incident affects data obtained from QuickBooks Online, we will revoke the affected connection, rotate the affected credentials, and notify Intuit and any affected individuals as required by applicable law.</p>
+
+<h2>10. Scope of these statements</h2>
+<p>We do not claim any third-party security certification or audit report for this Application, and none is implied by this statement. It describes the controls implemented in the Application as of the date above.</p>
+
+<h2>11. Reporting a security concern</h2>
+<p>Please report suspected vulnerabilities or security concerns to <strong>pshah@marlinspikegroup.com</strong>. We aim to acknowledge reports within five business days.</p>
+
+<nav class="footer">
+  <a href="privacy.html">Privacy Policy</a>
+  <a href="terms.html">Terms of Service</a>
+  <a href="security.html">Security</a>
+</nav>
+</main>
+</body>
+</html>

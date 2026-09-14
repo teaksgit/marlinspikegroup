@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Privacy Policy | Marlinspike Family Office Dashboard</title>
+<meta name="description" content="How the Marlinspike Family Office Dashboard collects, uses, stores, and protects information, including data accessed from QuickBooks Online." />
+<link rel="canonical" href="https://marlinspikegroup.com/privacy.html" />
+<style>
+  :root { --fg:#111827; --muted:#4b5563; --line:#e5e7eb; --bg:#ffffff; --code:#f3f4f6; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg);
+    font-family: ui-sans-serif, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size:15px; line-height:1.65; }
+  header { border-bottom:1px solid var(--line); }
+  .bar { max-width:44rem; margin:0 auto; padding:1rem; font-weight:600; }
+  main { max-width:44rem; margin:0 auto; padding:2.5rem 1rem 4rem; }
+  h1 { font-size:1.85rem; line-height:1.25; margin:0 0 .35rem; letter-spacing:-.01em; }
+  .updated { color:var(--muted); font-size:.85rem; margin:0 0 2rem; }
+  h2 { font-size:1.1rem; margin:2rem 0 .5rem; }
+  h3 { font-size:1rem; margin:1.5rem 0 .35rem; }
+  p, li { color:var(--muted); }
+  ul { padding-left:1.25rem; }
+  li { margin:.2rem 0; }
+  code { background:var(--code); border-radius:4px; padding:.1rem .3rem; font-size:.85em; }
+  a { color:#1d4ed8; }
+  nav.footer { margin-top:3rem; border-top:1px solid var(--line); padding-top:1.25rem;
+    display:flex; gap:1.25rem; flex-wrap:wrap; font-size:.9rem; }
+</style>
+</head>
+<body>
+<header><div class="bar">Marlinspike Family Office Dashboard</div></header>
+<main>
+<h1>Privacy Policy</h1>
+<p class="updated">Last updated: August 31, 2026</p>
+
+<p>This Privacy Policy describes how <strong>Marlinspike Group LLC</strong> ("we", "us") handles information in the Marlinspike Family Office Dashboard (the "Application"), a private financial reporting application used by our own organization and its authorized administrators.</p>
+
+<h2>1. Who the Application is for</h2>
+<p>The Application is a single-owner, private application. There is no public sign-up. Accounts are created only by an administrator, and access is limited to a small number of named individuals authorized by the owner. We do not offer the Application to the general public and we do not operate it as a multi-tenant service for unrelated customers.</p>
+
+<h2>2. Information we collect</h2>
+<h3>2.1 Account information</h3>
+<ul>
+  <li>Name and email address of each authorized user.</li>
+  <li>Authentication data, including password credentials and multi-factor enrollment data.</li>
+  <li>Activity records such as sign-in events, page views, and administrative actions, used for security review.</li>
+</ul>
+
+<h3>2.2 Financial information supplied by the owner</h3>
+<p>Entity structures, accounts, asset positions, valuations, and related records that the owner or an authorized administrator enters or imports.</p>
+
+<h3>2.3 Information accessed from QuickBooks Online</h3>
+<p>When an administrator connects a QuickBooks Online company file, the Application requests the <code>com.intuit.quickbooks.accounting</code> scope and reads:</p>
+<ul>
+  <li>Company name and identifier of the connected company file.</li>
+  <li>The chart of accounts (account name, type, subtype, classification, active status).</li>
+  <li>Expense and journal transaction lines: transaction date, transaction type, document number, vendor or payee name, memo, account, and amount.</li>
+</ul>
+<p>We do not request or store QuickBooks payroll data, employee records, customer contact details, bank account numbers, or payment card data. We use the connection for reading and reporting only; the Application does not write, modify, or delete data in QuickBooks Online.</p>
+
+<h2>3. How we use information</h2>
+<ul>
+  <li>To produce internal expense, profit-and-loss, and portfolio reporting for the owner.</li>
+  <li>To categorize expenses using a mapping layer maintained by the owner.</li>
+  <li>To authenticate users and secure the Application.</li>
+</ul>
+<p>We do not use this information for advertising, profiling, or automated decision-making about individuals, and we do not use it to train machine-learning models.</p>
+
+<h2>4. Disclosure to third parties</h2>
+<p>We do not sell, rent, or trade information, and we do not share it with third parties for their own purposes. Information is processed only by the service providers that operate the Application's infrastructure on our behalf, under their own contractual confidentiality and security obligations:</p>
+<ul>
+  <li>Our application and database hosting provider (application hosting, database, storage).</li>
+  <li>Intuit Inc., as the source of QuickBooks Online data the owner has authorized.</li>
+  <li>An AI service provider, where an authorized user asks the built-in advisor a question. Only the data needed to answer that question is sent, and the provider is contractually restricted from using it to train its models.</li>
+</ul>
+<p>We may disclose information where required by law, or to protect our legal rights or the security of the Application.</p>
+
+<h2>5. Retention and deletion</h2>
+<p>Information is retained for as long as the owner keeps it in the Application. An administrator can delete synced QuickBooks data or disconnect a company file at any time; disconnecting a company deletes the stored authorization tokens for that company. QuickBooks access can also be revoked at any time from within Intuit's own account settings, which immediately ends the Application's ability to read that company file.</p>
+
+<h2>6. Security</h2>
+<p>Access requires an account created by an administrator, and administrator accounts require multi-factor authentication. Sessions end automatically after a period of inactivity. Data is transmitted over TLS and stored in a managed database with row-level access rules that restrict each user to the entities they are authorized to see. OAuth tokens for QuickBooks are stored server-side in a table that is not readable by the browser and are never written to application logs. Details are in our <a href="security.html">Security statement</a>.</p>
+
+<h2>7. Children</h2>
+<p>The Application is not directed to children and is not used to collect data about children.</p>
+
+<h2>8. Changes</h2>
+<p>We may update this Policy. The revised version will be posted at this URL with a new "Last updated" date.</p>
+
+<h2>9. Contact</h2>
+<p><strong>pshah@marlinspikegroup.com</strong><br />
+<strong>Marlinspike Group LLC</strong>, <strong>991C Lomas Santa Fe #436, Solana Beach, CA 92075</strong></p>
+
+<nav class="footer">
+  <a href="privacy.html">Privacy Policy</a>
+  <a href="terms.html">Terms of Service</a>
+  <a href="security.html">Security</a>
+</nav>
+</main>
+</body>
+</html>
